@@ -6,6 +6,10 @@ import * as dotenv from 'dotenv';
  * https://github.com/motdotla/dotenv
  */
 dotenv.config();
+const baseURL = process.env.BASE_URL;
+if (!baseURL) {
+  throw new Error('BASE_URL environment variable is not defined.');
+}
 // import dotenv from 'dotenv';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
@@ -38,7 +42,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    baseURL: baseURL,
     browserName: 'chromium',							//Browser engine (chromium, firefox, webkit)
     channel: 'chrome',									  //Uses a specific installed browser (for example, Chrome or Edge)
     headless,
