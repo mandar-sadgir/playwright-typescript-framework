@@ -20,6 +20,10 @@ jobs:
     name: Playwright Tests
     runs-on: ubuntu-latest
 
+    env:
+      HEADLESS: 'true'
+      BASE_URL: ${{ vars.BASE_URL }}
+
     strategy:
       fail-fast: false
       matrix:
@@ -41,8 +45,6 @@ jobs:
 
       - name: Run Playwright tests
         run: npx playwright test --shard=${{ matrix.shard }}/4 --retries=1
-        env:
-          CI: true
 
       - name: Upload Playwright HTML Report
         if: always()
